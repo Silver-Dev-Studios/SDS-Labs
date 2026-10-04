@@ -223,6 +223,8 @@ main{position:relative;z-index:3;width:100%;max-width:860px;margin:0 auto;paddin
   .gh-link span{display:none}
   .gh-link{padding:7px 10px}
   .hero-meta{width:100%}
+  .hero-title .solid{font-size:clamp(48px,13.5vw,182px)}
+  .hero-title .ghost{font-size:clamp(62px,17vw,240px)}
   .experiment{padding:26px 18px 22px}
 }
 
