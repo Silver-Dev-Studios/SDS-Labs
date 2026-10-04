@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SDS Labs — Experiments by Silver Dev Studios</title>
+<meta name="description" content="SDS Labs is the unregulated corner of Silver Dev Studios — random projects with no business purpose, no roadmap, and no promises.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#060908">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Silver Dev Studios">
+<meta property="og:title" content="SDS Labs — Experiments by Silver Dev Studios">
+<meta property="og:description" content="Random projects with no business purpose. Runway for experiments. Liability limited to the lab floor.">
+<meta property="og:url" content="https://silver-dev-studios.github.io/SDS-Labs/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SDS Labs — Experiments by Silver Dev Studios">
+<meta name="twitter:description" content="Random projects with no business purpose. Runway for experiments. Liability limited to the lab floor.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23060908'/%3E%3Cpath d='M13 4v7.2L8.4 18a3.5 3.5 0 0 0 3 5.4h9.2a3.5 3.5 0 0 0 3-5.4L19 11.2V4' fill='none' stroke='%2358e6d0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.5 21h9' stroke='%2358e6d0' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='19' cy='7' r='1.6' fill='%23d8f26a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="#top" aria-label="SDS Labs home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v6.3L6.3 13a4 4 0 0 0 3.4 6h4.6a4 4 0 0 0 3.4-6L14 8.3V2"/><path d="M8.5 14h7"/></svg>
+      </span>
+      <span class="brand-name">SDS Labs</span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#vaults" class="nav-link"><span class="num">01</span>Vaults</a>
+      <a href="#protocols" class="nav-link"><span class="num">02</span>Protocols</a>
+      <a href="#lifecycle" class="nav-link"><span class="num">03</span>Lifecycle</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="gh-link" href="https://github.com/Silver-Dev-Studios/SDS-Labs" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <p class="overline">Silver Dev Studios — <span>Sanctioned experiments division</span></p>
+    <h1 class="hero-title">
+      <span class="ghost" aria-hidden="true">SDS</span>
+      <span class="solid">LABS</span>
+    </h1>
+    <div class="hero-sub">
+      <p class="lede">Random projects with <strong>no business purpose</strong>, made by people who refuse to shelve an idea. No roadmap, no guarantees, no reason required.</p>
+      <div class="hero-meta">
+        <span class="meta-chip"><span class="dot ok"></span> 3 vaults in operation</span>
+        <span class="meta-chip"><span class="dot warn"></span> standards: unknown</span>
+        <span class="meta-chip"><span class="dot idle"></span> liability: limited to lab floor</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn primary" href="#vaults">Inspect the vaults
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </a>
+      <a class="btn ghost-btn" href="https://discord.gg/RdKDd6bmMX" target="_blank" rel="noopener">Report a sighting ↗</a>
+    </div>
+  </section>
+
+  <section class="ticker" aria-label="Lab warnings">
+    <div class="ticker-track">
+      <span>⚠ anything in this lab may not have a reason for existing</span>
+      <span>⚠ projects may be deleted without notice</span>
+      <span>⚠ projects may also simply not change. forever</span>
+      <span>⚠ if a project gets too popular it gets promoted &amp; leaves the lab</span>
+      <span>⚠ nothing here is maintained as a real product</span>
+      <span>⚠ enter at your own curiosity</span>
+      <span>⚠ anything in this lab may not have a reason for existing</span>
+      <span>⚠ projects may be deleted without notice</span>
+      <span>⚠ projects may also simply not change. forever</span>
+      <span>⚠ if a project gets too popular it gets promoted &amp; leaves the lab</span>
+      <span>⚠ nothing here is maintained as a real product</span>
+      <span>⚠ enter at your own curiosity</span>
+    </div>
+  </section>
+
+  <section id="vaults" class="section">
+    <header class="section-head">
+      <p class="overline">Specimen storage — <span>Lab vaults</span></p>
+      <h2>Who keeps the <em>weird</em> here</h2>
+      <p class="section-intro">Every vault is a corner of the lab owned by one operator. They stock it with whatever they feel like. It is their mess.</p>
+    </header>
+    <div class="vaults">
+      <article class="vault" data-vault="clouded">
+        <div class="vault-top">
+          <span class="vault-serial">VLT-001</span>
+          <span class="status-pill">in operation</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">C</div>
+        <h3 class="vault-name">Clouded</h3>
+        <p class="vault-role">Vault keeper</p>
+        <p class="vault-desc">Everything stashed by Clouded, in whatever state it was left in.</p>
+        <div class="vault-meta">
+          <span>deed: none</span>
+          <span>repo: <a href="https://github.com/Silver-Dev-Studios/SDS-Labs/tree/main/alwaystrey" target="_blank" rel="noopener">alwaystrey</a></span>
+        </div>
+      </article>
+      <article class="vault" data-vault="dragoncy">
+        <div class="vault-top">
+          <span class="vault-serial">VLT-002</span>
+          <span class="status-pill">in operation</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">D</div>
+        <h3 class="vault-name">Dragoncy</h3>
+        <p class="vault-role">Vault keeper</p>
+        <p class="vault-desc">The dragoncy slot. Contents rumored to breathe occasionally.</p>
+        <div class="vault-meta">
+          <span>deed: none</span>
+          <span>repo: <a href="https://github.com/Silver-Dev-Studios/SDS-Labs/tree/main/dragoncy" target="_blank" rel="noopener">dragoncy</a></span>
+        </div>
+      </article>
+      <article class="vault" data-vault="nyx">
+        <div class="vault-top">
+          <span class="vault-serial">VLT-003</span>
+          <span class="status-pill">in operation</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">N</div>
+        <h3 class="vault-name">Nyx</h3>
+        <p class="vault-role">Vault keeper</p>
+        <p class="vault-desc">The nyx drawer. Nobody in the lab knows for sure what lives here.</p>
+        <div class="vault-meta">
+          <span>deed: none</span>
+          <span>repo: <a href="https://github.com/Silver-Dev-Studios/SDS-Labs/tree/main/nyx" target="_blank" rel="noopener">nyx</a></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="protocols" class="section">
+    <header class="section-head">
+      <p class="overline">Standing orders — <span>Lab protocols</span></p>
+      <h2>Three rules. <em>Sort of.</em></h2>
+    </header>
+    <div class="protocols">
+      <article class="protocol">
+        <span class="protocol-num">P-01</span>
+        <h3>Why does it exist?</h3>
+        <p>Anything in SDS Labs may not have a reason why it was made. That is acceptable. Projects may be deleted, or they may simply never change again.</p>
+      </article>
+      <article class="protocol">
+        <span class="protocol-num">P-02</span>
+        <h3>Why is nothing updated?</h3>
+        <p>Lab projects are side projects. They are not treated as big projects by SDS and are made for no particular reason — so they update when someone feels like it, not before.</p>
+      </article>
+      <article class="protocol">
+        <span class="protocol-num">P-03</span>
+        <h3>What if it gets big?</h3>
+        <p>If a project is actively used and the community wants more of it, it gets promoted: separated from SDS Labs and graduated into a real Silver Dev Studios product.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="lifecycle" class="section">
+    <header class="section-head">
+      <p class="overline">Specimen progression — <span>Lab lifecycle</span></p>
+      <h2>From lab bench to <em>real product</em></h2>
+    </header>
+    <ol class="lifecycle">
+      <li>
+        <span class="stage-num">A</span>
+        <div class="stage-card">
+          <h3>Curiosity</h3>
+          <p>Someone in the studio has an idea with no business case. It lands in a lab vault.</p>
+        </div>
+      </li>
+      <li>
+        <span class="stage-num">B</span>
+        <div class="stage-card">
+          <h3>Ignored / loved</h3>
+          <p>The idea either collects dust or collects users. Both outcomes are valid.</p>
+        </div>
+      </li>
+      <li>
+        <span class="stage-num">C</span>
+        <div class="stage-card">
+          <h3>Promotion</h3>
+          <p>If the community actively uses it, it graduates into a standalone SDS product and leaves the lab forever.</p>
+        </div>
+      </li>
+      <li>
+        <span class="stage-num">D</span>
+        <div class="stage-card">
+          <h3>Retirement</h3>
+          <p>If it stays ignored, it is archived or quietly deleted. Missing specimens are not investigated.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="experiment" aria-label="Interactive sample dispenser">
+    <p class="overline">Field instrument</p>
+    <h2>Dispense a random status report</h2>
+    <p class="section-intro">Wave a sample in front of the analysis bench. Results are generated live and mean absolutely nothing.</p>
+    <div class="bench">
+      <button id="dispense" class="btn primary" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v6.3L6.3 13a4 4 0 0 0 3.4 6h4.6a4 4 0 0 0 3.4-6L14 8.3V2"/><path d="M8.5 14h7"/></svg>
+        Analyze sample
+      </button>
+      <div id="report" class="report" aria-live="polite">
+        <span class="report-placeholder">No sample analyzed yet.</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v6.3L6.3 13a4 4 0 0 0 3.4 6h4.6a4 4 0 0 0 3.4-6L14 8.3V2"/><path d="M8.5 14h7"/></svg>
+      </span>
+      <span class="brand-name">SDS Labs</span>
+    </a>
+    <p class="footer-note">A division of <a href="https://github.com/Silver-Dev-Studios" target="_blank" rel="noopener">Silver Dev Studios</a>. Random projects with no business purpose.</p>
+    <div class="footer-links">
+      <a href="https://github.com/Silver-Dev-Studios/SDS-Labs" target="_blank" rel="noopener">Repository</a>
+      <a href="https://discord.gg/RdKDd6bmMX" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com/Silver-Dev-Studios/SDS" target="_blank" rel="noopener">SDS Overview</a>
+    </div>
+    <p class="footer-stamp">Specimen catalog v1.0 — contents may decay.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
