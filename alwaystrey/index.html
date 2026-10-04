@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>alwaystrey — products & the person</title>
+<meta name="description" content="Clouded — creator and owner of Silver Dev Studios and identities.dev. Products, a person, and a tiny playable minigame. Same chemiluminescent lab, same chaos.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#060908">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Silver Dev Studios">
+<meta property="og:title" content="alwaystrey — products & the person">
+<meta property="og:description" content="Clouded, creator and owner of SDS and identities.dev — plus products, a person, and a playable minigame.">
+<meta property="og:url" content="https://silver-dev-studios.github.io/SDS-Labs/alwaystrey/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="alwaystrey — products & the person">
+<meta name="twitter:description" content="Clouded, creator and owner of SDS and identities.dev — plus products, a person, and a playable minigame.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23060908'/%3E%3Cpath d='M13 4v7.2L8.4 18a3.5 3.5 0 0 0 3 5.4h9.2a3.5 3.5 0 0 0 3-5.4L19 11.2V4' fill='none' stroke='%2358e6d0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.5 21h9' stroke='%2358e6d0' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='19' cy='7' r='1.6' fill='%23d8f26a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+/* page-specific dressing for the alwaystrey vault — same lab palette */
+.person-card{display:flex;gap:22px;align-items:flex-start;padding:26px 24px;border:1px solid var(--border);
+  border-radius:14px;background:var(--surface);position:relative;overflow:hidden;margin-top:24px}
+.person-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cy-dim) 30%,var(--cy-dim) 70%,transparent)}
+.person-card:hover{background:var(--surface-2);border-color:var(--border-2)}
+.person-avatar{flex:none;display:grid;place-items:center;width:84px;height:84px;border-radius:22px;
+  border:1px solid var(--border-2);background:var(--surface-2);color:var(--cy);
+  font-family:var(--display);font-size:46px;box-shadow:0 0 34px -10px var(--cy-dim)}
+.person-body{min-width:0}
+.person-alias{margin:0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-4)}
+.person-name{margin:4px 0 0;font-family:var(--display);font-size:30px;font-weight:400;line-height:1.05;color:var(--text)}
+.person-name em{font-style:normal;color:var(--cy)}
+.person-role{margin:5px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.person-desc{margin:14px 0 0;font-size:14px;line-height:1.6;color:var(--text-2);max-width:62ch;text-wrap:pretty}
+.person-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.person-links a{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);
+  border-radius:999px;background:var(--surface-2);color:var(--text-3);font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.03em;text-decoration:none;transition:background .16s var(--ease),border-color .16s var(--ease),color .16s var(--ease)}
+.person-links a:hover{background:var(--surface-3);border-color:var(--border-2);color:var(--cy)}
+.person-links a .dot{width:5px;height:5px}
+
+/* ---- arcade / minigame ---- */
+.game{width:100%}
+.game-hud{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.game-hud .hud-item{padding:4px 10px;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
+.game-hud .hud-score{color:var(--cy);border-color:var(--cy-dim)}
+.game-hud .hud-lives{letter-spacing:.2em;color:var(--acid)}
+.track-wrap{margin-bottom:6px}
+.track{position:relative;height:42px;border:1px solid var(--border-2);border-radius:12px;background:var(--surface-2);
+  overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair}
+.track::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  box-shadow:inset 0 0 40px -18px rgba(88,230,208,.25)}
+.zone{position:absolute;top:3px;bottom:3px;left:10%;width:16%;border-radius:8px;background:rgba(216,242,106,.07);
+  border:1px solid rgba(216,242,106,.35);transition:left .35s var(--ease)}
+.zone::before{content:"ok band";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--mono);
+  font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(216,242,106,.4)}
+.fill{position:absolute;top:0;bottom:0;left:0;width:0%;background:linear-gradient(90deg,rgba(88,230,208,.25),rgba(88,230,208,.85));
+  border-right:2px solid var(--cy);box-shadow:0 0 18px -2px var(--cy-dim);transition:background .1s linear}
+.track.overheat .fill{background:linear-gradient(90deg,rgba(242,85,90,.3),rgba(242,85,90,.9));border-right-color:var(--red)}
+.track.blink{animation:blink .35s ease-in-out 3}
+.game-scale{margin:10px 0 0;position:relative;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-4)}
+.game-scale .stamp{position:absolute;right:0;top:0}
+.game-hint{margin:14px 0 0;font-size:12.5px;color:var(--text-3);line-height:1.55}
+.game-hint b{color:var(--cy);font-weight:600}
+.game-ctls{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn.inject{min-width:170px;justify-content:center}
+@media(max-width:600px){
+  .person-card{flex-direction:column;align-items:center;text-align:center;padding:22px 16px}
+  .person-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="#top" aria-label="alwaystrey home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3v6.6L8.2 15a3.4 3.4 0 0 0 2.9 5.6h9a3.4 3.4 0 0 0 2.9-5.6L18.6 9.6V3"/><path d="M11 19h8.6"/></svg>
+      </span>
+      <span class="brand-name">alwaystrey</span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#products" class="nav-link"><span class="num">01</span>Products</a>
+      <a href="#person" class="nav-link"><span class="num">02</span>The person</a>
+      <a href="#arcade" class="nav-link"><span class="num">03</span>Arcade</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="gh-link" href="https://github.com/Silver-Dev-Studios/SDS-Labs/tree/main/alwaystrey" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>Vault</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <p class="overline">Silver Dev Studios — <span>the vault of VLT-001</span></p>
+    <h1 class="hero-title">
+      <span class="ghost" aria-hidden="true">CLOUDED</span>
+      <span class="solid">ALWAYSTREY</span>
+    </h1>
+    <div class="hero-sub">
+      <p class="lede">A person, a vault, and a handful of hand-built tools. <strong>Clouded</strong> — creator and owner of <strong>Silver Dev Studios</strong> and <strong>identities.dev</strong> — keeps everything in here: products, plans, and at least one playable mistake.</p>
+      <div class="hero-meta">
+        <span class="meta-chip"><span class="dot ok"></span> creator &amp; owner — SDS</span>
+        <span class="meta-chip"><span class="dot ok"></span> identities.dev</span>
+        <span class="meta-chip"><span class="dot idle"></span> vault keeper — VLT-001</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn primary" href="#products">See the products
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </a>
+      <a class="btn ghost-btn" href="https://identities-dev.com/" target="_blank" rel="noopener">identities.dev ↗</a>
+    </div>
+  </section>
+
+  <section class="ticker" aria-label="Vault principles">
+    <div class="ticker-track">
+      <span>⚠ everything hand-built. no bloat</span>
+      <span>⚠ customization is not a premium tier — it is the point</span>
+      <span>⚠ products graduate from SDS Labs when they get big</span>
+      <span>⚠ identity pages that actually feel like you</span>
+      <span>⚠ one person, too many tabs open</span>
+      <span>⚠ enter at your own curiosity</span>
+      <span>⚠ everything hand-built. no bloat</span>
+      <span>⚠ customization is not a premium tier — it is the point</span>
+      <span>⚠ products graduate from SDS Labs when they get big</span>
+      <span>⚠ identity pages that actually feel like you</span>
+      <span>⚠ one person, too many tabs open</span>
+      <span>⚠ enter at your own curiosity</span>
+    </div>
+  </section>
+
+  <section id="products" class="section">
+    <header class="section-head">
+      <p class="overline">The catalog — <span>Products</span></p>
+      <h2>Things made by <em>the person</em></h2>
+      <p class="section-intro">Small in scope, big on craft, allergic to bloat. Everything below is hand-built by Clouded and the quiet few at Silver Dev Studios.</p>
+    </header>
+    <div class="vaults">
+      <article class="vault">
+        <div class="vault-top">
+          <span class="vault-serial">PROD-01</span>
+          <span class="status-pill">flagship</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">I</div>
+        <h3 class="vault-name">identities.dev</h3>
+        <p class="vault-role">link-in-bio / identity platform</p>
+        <p class="vault-desc">Build a profile page that feels like you — blocks, live status, clean URLs, and customization as the point, not a premium tier.</p>
+        <div class="vault-meta">
+          <span><a href="https://identities-dev.com/" target="_blank" rel="noopener">identities-dev.com ↗</a></span>
+          <span><a href="https://github.com/Silver-Dev-Studios/identities.dev" target="_blank" rel="noopener">repo ↗</a></span>
+        </div>
+      </article>
+      <article class="vault">
+        <div class="vault-top">
+          <span class="vault-serial">PROD-02</span>
+          <span class="status-pill">discord</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">B</div>
+        <h3 class="vault-name">SDS Bot</h3>
+        <p class="vault-role">all-in-one discord bot</p>
+        <p class="vault-desc">AI chat via Gemini, a full YouTube music player, moderation, tickets with HTML transcripts, reaction-role panels, custom embeds, and a web crawler.</p>
+        <div class="vault-meta">
+          <span><a href="https://discord.gg/RdKDd6bmMX" target="_blank" rel="noopener">discord.gg ↗</a></span>
+        </div>
+      </article>
+      <article class="vault">
+        <div class="vault-top">
+          <span class="vault-serial">PROD-03</span>
+          <span class="status-pill">trading</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">K</div>
+        <h3 class="vault-name">Katanith</h3>
+        <p class="vault-role">trading journal &amp; analytics</p>
+        <p class="vault-desc">Log trades, protect accounts with auto-lock rules, analyze your edge with advanced stats, and track the economic calendar — one clean workspace.</p>
+        <div class="vault-meta">
+          <span><a href="https://katanith.com" target="_blank" rel="noopener">katanith.com ↗</a></span>
+        </div>
+      </article>
+      <article class="vault">
+        <div class="vault-top">
+          <span class="vault-serial">PROD-04</span>
+          <span class="status-pill">windows</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">S</div>
+        <h3 class="vault-name">Spitari</h3>
+        <p class="vault-role">aim / visuals / player tools</p>
+        <p class="vault-desc">A focused Windows interface — 2D/3D ESP, skeletons, raycast aimbot, RGB chams, and a target HUD. Access via monthly or lifetime keys.</p>
+        <div class="vault-meta">
+          <span><a href="https://spitari.win" target="_blank" rel="noopener">spitari.win ↗</a></span>
+        </div>
+      </article>
+      <article class="vault">
+        <div class="vault-top">
+          <span class="vault-serial">PROD-05</span>
+          <span class="status-pill">editor</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">C</div>
+        <h3 class="vault-name">SDS Code Editor</h3>
+        <p class="vault-role">client-side code editor</p>
+        <p class="vault-desc">Minimal browser editor for Python, JavaScript, TypeScript, Lua, HTML, and SQL. No servers, no uploads — everything stays local.</p>
+        <div class="vault-meta">
+          <span><a href="https://github.com/Silver-Dev-Studios" target="_blank" rel="noopener">SDS GitHub ↗</a></span>
+        </div>
+      </article>
+      <article class="vault" data-arcade>
+        <div class="vault-top">
+          <span class="vault-serial">PROD-06</span>
+          <span class="status-pill">minigame</span>
+        </div>
+        <div class="vault-avatar" aria-hidden="true">A</div>
+        <h3 class="vault-name">Arcade — Chargelab</h3>
+        <p class="vault-role">playable minigame</p>
+        <p class="vault-desc">The newest product: hold to charge a reactor, release inside the band. No business purpose. None at all. Specimens may be harmed.</p>
+        <div class="vault-meta">
+          <span><a href="#arcade">play now ↓</a></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="person" class="section">
+    <header class="section-head">
+      <p class="overline">The specimen — <span>who is the person</span></p>
+      <h2>Creator and owner of <em>SDS</em> &amp; identities.dev</h2>
+      <p class="section-intro">Every vault has a keeper. VLT-001 is kept by the person who started the whole studio — that is me.</p>
+    </header>
+    <article class="person-card">
+      <div class="person-avatar" aria-hidden="true">C</div>
+      <div class="person-body">
+        <p class="person-alias">alwaystrey · VLT-001</p>
+        <h3 class="person-name">Clouded <em>(me)</em></h3>
+        <p class="person-role">creator &amp; owner — Silver Dev Studios · identities.dev</p>
+        <p class="person-desc">Hello — I am Clouded, the person behind Silver Dev Studios. I make small, hand-crafted web tools that feel like you: identity pages, Discord bots, trading tools, code editors, and the occasional random thing. identities.dev is the north star — a link-in-bio platform where customization is the point, not a premium tier. In SDS Labs I keep VLT-001, this very vault, where ideas come to live. Or to not change for months. Both outcomes are accepted.</p>
+        <div class="person-links">
+          <a href="https://github.com/Treywayplayz" target="_blank" rel="noopener"><span class="dot ok"></span>GitHub — @Treywayplayz</a>
+          <a href="https://discord.gg/RdKDd6bmMX" target="_blank" rel="noopener"><span class="dot ok"></span>Discord — Spooky Clouded</a>
+          <a href="https://identities-dev.com/" target="_blank" rel="noopener"><span class="dot ok"></span>identities.dev</a
+          <a href="https://silver-dev-studios.github.io/SDS/" target="_blank" rel="noopener"><span class="dot idle"></span>SDS Overview</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="arcade" class="section">
+    <header class="section-head">
+      <p class="overline">Arcade — <span>Minigame</span></p>
+      <h2>Chargelab</h2>
+      <p class="section-intro">Field instrument PROD-06. Hold to charge the reactor, release inside the luminous band. Too much energy and everything goes somewhere unlabelled.</p>
+    </header>
+    <div class="experiment">
+      <p class="overline" style="margin:0 0 6px">PROD-06 — in operation</p>
+      <h2>Dispense exactly the right amount of charge</h2>
+      <div class="game">
+        <div class="game-hud">
+          <span class="hud-item" id="gRound">Round 01</span>
+          <span class="hud-item hud-score" id="gScore">Score 000</span>
+          <span class="hud-item hud-lives" id="gLives">▮▮▮</span>
+        </div>
+        <div class="track-wrap">
+          <div class="track" id="track" aria-hidden="true">
+            <div class="zone" id="zone"></div>
+            <div class="fill" id="fill"></div>
+          </div>
+          <div class="game-scale"><span>0%</span><span class="stamp">100%</span></div>
+        </div>
+        <p class="game-hint">Press and hold <b>Inject</b> to fill the gauge. Release inside the <b>acid band</b> to bank points. Overheat costs a heart.</p>
+        <div class="game-ctls">
+          <button id="inject" class="btn primary inject" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3v6.6L8.2 15a3.4 3.4 0 0 0 2.9 5.6h9a3.4 3.4 0 0 0 2.9-5.6L18.6 9.6V3"/><path d="M11 19h8.6"/></svg>
+            Inject
+          </button>
+          <button id="restart" class="btn ghost-btn" type="button" hidden>Restart</button>
+        </div>
+        <div id="gMsg" class="report" aria-live="polite">
+          <span class="report-placeholder">No sample charged yet. Hold Inject to begin.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3v6.6L8.2 15a3.4 3.4 0 0 0 2.9 5.6h9a3.4 3.4 0 0 0 2.9-5.6L18.6 9.6V3"/><path d="M11 19h8.6"/></svg>
+      </span>
+      <span class="brand-name">alwaystrey</span>
+    </a>
+    <p class="footer-note">A vault of <a href="https://github.com/Silver-Dev-Studios" target="_blank" rel="noopener">Silver Dev Studios</a>. Products, a person, anda tiny arcade — curated by Clouded, keeper of VLT-001.</p>
+    <div class="footer-links">
+      <a href="https://github.com/Silver-Dev-Studios/SDS-Labs/tree/main/alwaystrey" target="_blank" rel="noopener">Vault repo</a>
+      <a href="https://github.com/Silver-Dev-Studios/SDS-Labs" target="_blank" rel="noopener">SDS Labs</a>
+      <a href="https://github.com/Silver-Dev-Studios/SDS" target="_blank" rel="noopener">SDS Overview</a>
+      <a href="https://discord.gg/RdKDd6bmMX" target="_blank" rel="noopener">Discord</a>
+    </div>
+    <p class="footer-stamp">Vault specimen card v1.0 — contents subject to developer whims.</p>
+  </div>
+</footer>
+
+<script src="../app.js"></script>
+<script>
+/* Chargelab — hold-to-charge minigame. Lab flavored, zero dependencies. */
+(function () {
+  'use strict';
+
+  var track = document.getElementById('track');
+  var zone = document.getElementById('zone');
+  var fill = document.getElementById('fill');
+  var injectBtn = document.getElementById('inject');
+  var restartBtn = document.getElementById('restart');
+  var gRound = document.getElementById('gRound');
+  var gScore = document.getElementById('gScore');
+  var gLives = document.getElementById('gLives');
+  var gMsg = document.getElementById('gMsg');
+
+  var running = false;
+  var holding = false;
+  var fillPct = 0;
+  var zoneL = 0.10;
+  var zoneW =0.16;
+  var round =1;
+  var score =0;
+  var lives =3;
+  var speed =24;
+  var raf = null;
+  var last = null;
+
+  function pad(n, w) {
+    var s = String(n);
+    while (s.length < w) s = '0' + s;
+    return s;
+  }
+
+  function msg(html, cls) {
+    gMsg.innerHTML = '<span class="' + cls + '">' + html + '</span>';
+  }
+
+  function placeZone() {
+    var maxL = 1 - zoneW -0.04;
+    zoneL =0.04 + Math.random() * maxL;
+    zone.style.left = (zoneL * 100) + '%';
+  }
+
+  function renderFill() {
+    fill.style.width = Math.min(fillPct, 100) + '%';
+  }
+
+  function updateHud() {
+    gRound.textContent = 'Round ' + pad(round,2);
+    gScore.textContent = 'Score ' + pad(score,3);
+    gLives.textContent = hearts();
+  }
+
+  function hearts() {
+    var s = '';
+    for (var i =0; i <3; i++) s += (i < lives) ? '▮' : '▯';
+    return s;
+  }
+
+  function boom() {
+    track.classList.add('overheat');
+    track.classList.add('blink');
+    setTimeout(function () { track.classList.remove('overheat', 'blink'); },600);
+  }
+
+  function release() {
+    if (!running || !holding) return;
+    holding = false;
+    var z0 = zoneL, z1 = zoneL + zoneW;
+    var f = fillPct /100;
+    if (fillPct >=100) {
+      lives--;
+      boom();
+      msg('⛔ OVERHEAT — reactor vented. You lost a heart.', 's-warn');
+      if (lives <=0) { endGame(); return; }
+      fillPct =0;
+      renderFill();
+    } else if (f >= z0 && f <= z1) {
+      var closeness = Math.min(f - z0, z1 - f) / (zoneW /2);
+      var pts = Math.round(30 +70 * closeness);
+      var exact = closeness >=0.98;
+      if (exact) pts +=100;
+      score += pts;
+      round++;
+      speed = Math.min(72,24 * (1 + (round -1) *0.16));
+      fillPct =0;
+      renderFill();
+      placeZone();
+      if (exact) msg('PERFECT — exact charge. +' + pts + ' pts', 's-accent');
+      else msg('✓ Charge banked — +' + pts + ' pts.', 's-line');
+    } else {
+      fillPct =0;
+      renderFill();
+      placeZone();
+      msg('MISS — the band is elsewhere. No charge banked.', 's-warn');
+    }
+    updateHud();
+  }
+
+  function endGame() {
+    running = false;
+    holding = false;
+    restartBtn.hidden = false;
+    track.classList.remove('overheat');
+    msg('⛔ Reactor offline — final score ' + score + ', my lab. Restart to go again.', 's-warn');
+    updateHud();
+  }
+
+  function startRun() {
+    running = true;
+    round =1; score =0; lives =3; speed =24; fillPct =0;
+    restartBtn.hidden = true;
+    placeZone();
+    renderFill();
+    updateHud();
+    msg('Chargelab online. Hold Inject., release inside the band.', 's-line');
+  }
+
+  function tick(now) {
+    if (!holding) { raf = null; return; }
+    if (last == null) last = now;
+    var dt = (now - last) /1000;
+    last = now;
+    fillPct = Math.min(fillPct + speed * dt,100);
+    renderFill();
+    if (fillPct >=100) { holding = false; release(); }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function press() {
+    if (!running) startRun();
+    if (!running) return;
+    holding = true;
+    last = null;
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(tick);
+  }
+
+  function up() { release(); }
+
+  injectBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); press(); });
+  window.addEventListener('pointerup', up);
+  injectBtn.addEventListener('pointerleave', up);
+  window.addEventListener('blur', up);
+  document.addEventListener('keydown', function (e) { if (e.code === 'Space') { e.preventDefault(); press(); } });
+  document.addEventListener('keyup', function (e) { if (e.code === 'Space') up(); });
+
+  restartBtn.addEventListener('click', startRun);
+  placeZone();
+  updateHud();
+
+})();
+</script>
+</body>
+</html>
