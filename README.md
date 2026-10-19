@@ -25,6 +25,7 @@ Every project belongs to a **vault** — a corner of the lab owned by one keeper
 | [VLT-001](alwaystrey/) | Clouded | [alwaystrey](alwaystrey/) |
 | [VLT-002](dragoncy/) | Dragoncy | [dragoncy](dragoncy/) |
 | [VLT-003](nyx/) | Nyx | [nyx](nyx/) |
+| [VLT-004](phantom/) | Phantom | [phantom](phantom/) |
 
 Each vault repo has its own README describing (or not describing) what is inside.
 
